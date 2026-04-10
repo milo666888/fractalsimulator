@@ -47,11 +47,9 @@ export default function App() {
           <img 
             src={logoImg}
             alt="Logo" 
-            className={`max-h-full max-w-full object-contain z-10 transition-opacity duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`} 
-            onLoad={() => setLogoLoaded(true)}
-            onError={(e) => e.currentTarget.style.display = 'none'} 
+            className="max-h-full max-w-full object-contain z-10" 
           />
-          {!logoLoaded && (
+          {!logoImg && (
             <div className="absolute inset-0 bg-[#eef0f8] border-2 border-dashed border-[#c0c8e0] rounded-lg flex items-center justify-center text-[10px] text-[#9098b8] font-bold text-center leading-tight z-0">
               公司<br/>LOGO
             </div>
