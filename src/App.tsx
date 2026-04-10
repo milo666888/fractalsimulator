@@ -44,7 +44,7 @@ export default function App() {
         <div className="h-10 w-10 shrink-0 relative flex items-center justify-center">
           {/* 支援使用者自行上傳的 logo.png */}
           <img 
-            src="/logo.png" 
+            src={`${import.meta.env.BASE_URL}logo.png`}
             alt="Logo" 
             className={`max-h-full max-w-full object-contain z-10 transition-opacity duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`} 
             onLoad={() => setLogoLoaded(true)}
