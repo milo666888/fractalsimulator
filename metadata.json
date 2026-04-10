@@ -1,0 +1,5 @@
+{
+  "name": "碎形模擬器",
+  "description": "一個互動式工具，用於探索門格海綿 (Menger Sponge) 在不同階數下的點、線、面數量與曲面虧格數。",
+  "requestFramePermissions": []
+}
