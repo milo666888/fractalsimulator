@@ -248,7 +248,8 @@ function Sierpinski3D({ level }: { level: number }) {
       color: '#2ecc71', // 稍微調亮一點的綠色，讓受光面更明顯
       roughness: 0.8,
       metalness: 0.0,
-      flatShading: true
+      flatShading: true,
+      side: THREE.DoubleSide
     });
 
     const mesh = new THREE.InstancedMesh(geometry, material, count);

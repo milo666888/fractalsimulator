@@ -39,10 +39,10 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
   const [isDescOpen, setIsDescOpen] = useState(false);
 
   return (
-    <div className="flex flex-col md:flex-row flex-1 overflow-hidden w-full h-full bg-[#f4f5fa] text-[#1a1f36]">
+    <div className="flex flex-col lg:flex-row flex-1 lg:overflow-hidden w-full h-full bg-[#f4f5fa] text-[#1a1f36]">
       
-      {/* 手機版上方列 */}
-      <div className="md:hidden flex flex-col bg-white border-b border-[#d8dcea] shrink-0 z-10">
+      {/* 手機/平板版上方列 */}
+      <div className="lg:hidden flex flex-col bg-white border-b border-[#d8dcea] shrink-0 z-10">
         <div className="p-3 border-b border-[#d8dcea] bg-[#fdf4ff]">
           {dropdownNode}
         </div>
@@ -66,7 +66,7 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
       </div>
 
       {/* 電腦版左側面板 (選單 + 說明 + 參數) */}
-      <aside className="hidden md:flex w-[320px] bg-white border-r border-[#d8dcea] flex-col overflow-y-auto shrink-0 z-10">
+      <aside className="hidden lg:flex w-[320px] bg-white border-r border-[#d8dcea] flex-col overflow-y-auto shrink-0 z-10">
         <div className="p-4 border-b border-[#d8dcea] bg-[#fdf4ff]">
           {dropdownNode}
         </div>
@@ -87,7 +87,7 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
             )}
           </AnimatePresence>
         </div>
-        <div className="p-4 md:p-5 flex-1">
+        <div className="p-4 lg:p-5 flex-1">
           <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
             <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
             參數設定
@@ -99,15 +99,15 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
       </aside>
 
       {/* 中間畫布區域 */}
-      <main className="flex-1 relative flex items-center justify-center overflow-hidden p-2 md:p-4">
+      <main className="flex-1 relative flex items-center justify-center lg:overflow-hidden p-2 lg:p-4 min-h-[50vh] lg:min-h-0 shrink-0">
         <div className="w-full h-full bg-white rounded-xl shadow-sm border border-[#d8dcea] relative overflow-hidden flex items-center justify-center">
           {canvasNode}
         </div>
       </main>
 
       {/* 電腦版右側面板 (算術與數據) */}
-      <aside className="hidden md:flex w-[320px] bg-[#f4f5fa] border-l border-[#d8dcea] flex-col overflow-y-auto shrink-0 z-10">
-        <div className="p-4 md:p-5">
+      <aside className="hidden lg:flex w-[320px] bg-[#f4f5fa] border-l border-[#d8dcea] flex-col overflow-y-auto shrink-0 z-10">
+        <div className="p-4 lg:p-5">
           <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
             <span className="w-2 h-2 rounded-full bg-[#7c3aed]"></span>
             算術與數據
@@ -118,8 +118,8 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
         </div>
       </aside>
 
-      {/* 手機版下方區域 (參數 + 算術與數據) */}
-      <div className="md:hidden flex flex-col shrink-0 z-10 bg-white border-t border-[#d8dcea] max-h-[45vh] overflow-y-auto">
+      {/* 手機/平板版下方區域 (參數 + 算術與數據) */}
+      <div className="lg:hidden flex flex-col shrink-0 z-10 bg-white border-t border-[#d8dcea]">
         <div className="p-4">
           <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
             <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>

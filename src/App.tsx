@@ -9,7 +9,7 @@ import SierpinskiTriangle from './components/fractals/SierpinskiTriangle';
 import PythagorasTree from './components/fractals/PythagorasTree';
 import KochSnowflake from './components/fractals/KochSnowflake';
 import FractalTree from './components/fractals/FractalTree';
-import logoImg from './logo.png';
+import logoImg from './brand-icon.png';
 
 const fractals = [
   { id: 'menger', name: '門格海綿 (Menger Sponge)', component: MengerSponge },
@@ -39,7 +39,7 @@ export default function App() {
   );
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-[#f4f5fa] overflow-hidden" style={{ fontFamily: '"Times New Roman", "Noto Sans TC", "Microsoft JhengHei", sans-serif' }}>
+    <div className="min-h-[100dvh] lg:h-[100dvh] w-screen flex flex-col bg-[#f4f5fa] lg:overflow-hidden overflow-y-auto" style={{ fontFamily: '"Times New Roman", "Noto Sans TC", "Microsoft JhengHei", sans-serif' }}>
       {/* Header */}
       <header className="h-16 flex items-center px-5 bg-white border-b border-[#d8dcea] shrink-0 gap-4 z-20">
         <div className="h-10 w-10 shrink-0 relative flex items-center justify-center">
@@ -57,7 +57,9 @@ export default function App() {
         </div>
         <div className="w-px h-8 bg-[#d8dcea]"></div>
         <div>
-          <h1 className="text-xl font-bold text-[#1a1f36] leading-tight">碎形模擬器</h1>
+          <h1 className="text-xl font-bold text-[#1a1f36] leading-tight">
+            碎形模擬器 <span className="text-[10px] text-gray-400 font-normal ml-2">v1.1</span>
+          </h1>
           <p className="text-[13px] text-[#5a6280] mt-0.5 hidden sm:block">觀察數學圖形：遞迴、維度與極限</p>
         </div>
       </header>
