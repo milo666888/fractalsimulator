@@ -9,6 +9,7 @@ import SierpinskiTriangle from './components/fractals/SierpinskiTriangle';
 import PythagorasTree from './components/fractals/PythagorasTree';
 import KochSnowflake from './components/fractals/KochSnowflake';
 import FractalTree from './components/fractals/FractalTree';
+import logoImg from './logo.png';
 
 const fractals = [
   { id: 'menger', name: '門格海綿 (Menger Sponge)', component: MengerSponge },
@@ -44,7 +45,7 @@ export default function App() {
         <div className="h-10 w-10 shrink-0 relative flex items-center justify-center">
           {/* 支援使用者自行上傳的 logo.png */}
           <img 
-            src={`${import.meta.env.BASE_URL}logo.png`}
+            src={logoImg}
             alt="Logo" 
             className={`max-h-full max-w-full object-contain z-10 transition-opacity duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`} 
             onLoad={() => setLogoLoaded(true)}
