@@ -46,7 +46,7 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
         <div className="p-3 border-b border-[#d8dcea] bg-[#fdf4ff]">
           {dropdownNode}
         </div>
-        <div className="p-3">
+        <div className="p-3 border-b border-[#d8dcea]">
           <button onClick={() => setIsDescOpen(!isDescOpen)} className="w-full flex justify-between items-center font-bold text-[#5a6280] text-left">
             <span className="flex items-center gap-2">
               <span className="text-lg">📖</span> 圖形說明
@@ -62,6 +62,15 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
+        <div className="p-4">
+          <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
+            參數設定
+          </div>
+          <div className="flex flex-col gap-4">
+            {controlsNode}
+          </div>
         </div>
       </div>
 
@@ -118,18 +127,9 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
         </div>
       </aside>
 
-      {/* 手機/平板版下方區域 (參數 + 算術與數據) */}
+      {/* 手機/平板版下方區域 (算術與數據) */}
       <div className="lg:hidden flex flex-col shrink-0 z-10 bg-white border-t border-[#d8dcea]">
-        <div className="p-4">
-          <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
-            參數設定
-          </div>
-          <div className="flex flex-col gap-4">
-            {controlsNode}
-          </div>
-        </div>
-        <div className="p-4 bg-[#f4f5fa] border-t border-[#d8dcea]">
+        <div className="p-4 bg-[#f4f5fa]">
           <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
             <span className="w-2 h-2 rounded-full bg-[#7c3aed]"></span>
             算術與數據

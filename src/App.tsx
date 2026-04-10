@@ -9,7 +9,6 @@ import SierpinskiTriangle from './components/fractals/SierpinskiTriangle';
 import PythagorasTree from './components/fractals/PythagorasTree';
 import KochSnowflake from './components/fractals/KochSnowflake';
 import FractalTree from './components/fractals/FractalTree';
-import logoImg from './brand-icon.png';
 
 const fractals = [
   { id: 'menger', name: '門格海綿 (Menger Sponge)', component: MengerSponge },
@@ -21,7 +20,7 @@ const fractals = [
 
 export default function App() {
   const [selectedFractal, setSelectedFractal] = useState(fractals[0].id);
-  const [logoLoaded, setLogoLoaded] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   const CurrentFractalComponent = fractals.find(f => f.id === selectedFractal)?.component || MengerSponge;
 
@@ -44,12 +43,15 @@ export default function App() {
       <header className="h-16 flex items-center px-5 bg-white border-b border-[#d8dcea] shrink-0 gap-4 z-20">
         <div className="h-10 w-10 shrink-0 relative flex items-center justify-center">
           {/* 支援使用者自行上傳的 logo.png */}
-          <img 
-            src={logoImg}
-            alt="Logo" 
-            className="max-h-full max-w-full object-contain z-10" 
-          />
-          {!logoImg && (
+          {!logoError && (
+            <img 
+              src={`${import.meta.env.BASE_URL}logo.png?v=1.3`}
+              alt="Logo" 
+              className="max-h-full max-w-full object-contain z-10" 
+              onError={() => setLogoError(true)}
+            />
+          )}
+          {logoError && (
             <div className="absolute inset-0 bg-[#eef0f8] border-2 border-dashed border-[#c0c8e0] rounded-lg flex items-center justify-center text-[10px] text-[#9098b8] font-bold text-center leading-tight z-0">
               公司<br/>LOGO
             </div>
@@ -58,7 +60,7 @@ export default function App() {
         <div className="w-px h-8 bg-[#d8dcea]"></div>
         <div>
           <h1 className="text-xl font-bold text-[#1a1f36] leading-tight">
-            碎形模擬器 <span className="text-[10px] text-gray-400 font-normal ml-2">v1.1</span>
+            碎形模擬器 <span className="text-[10px] text-gray-400 font-normal ml-2">v1.3</span>
           </h1>
           <p className="text-[13px] text-[#5a6280] mt-0.5 hidden sm:block">觀察數學圖形：遞迴、維度與極限</p>
         </div>

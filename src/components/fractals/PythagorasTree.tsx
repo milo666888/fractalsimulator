@@ -29,7 +29,7 @@ export default function PythagorasTree({ dropdownNode }: { dropdownNode: React.R
       description={<p><strong>畢氏樹</strong>是由正方形組成的平面碎形。從一個大正方形開始，在其上方建立一個直角三角形，然後在三角形的另外兩個邊上建立兩個較小的正方形，不斷重複此過程。</p>}
       controlsNode={controlsNode}
       mathNode={mathNode}
-      canvasNode={<svg viewBox="-150 -300 300 350" className="w-full h-full drop-shadow-md"><Tree level={level} angle={angleDeg * (Math.PI / 180)} /></svg>}
+      canvasNode={<svg viewBox="-250 -400 500 450" className="w-full h-full drop-shadow-md"><Tree level={level} angle={angleDeg * (Math.PI / 180)} /></svg>}
     />
   );
 }

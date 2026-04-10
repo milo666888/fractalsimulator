@@ -127,7 +127,7 @@ function Sierpinski3D({ level }: { level: number }) {
 
     // 降低 FOV (從 75 降到 35) 以減少透視變形，並將攝影機往後拉
     const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1000);
-    camera.position.set(0, 1.5, 4.5);
+    camera.position.set(0, 1.5, 6.5);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
