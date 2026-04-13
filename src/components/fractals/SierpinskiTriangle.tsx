@@ -79,7 +79,7 @@ export default function SierpinskiTriangle({ dropdownNode }: { dropdownNode: Rea
       mathNode={mathNode}
       canvasNode={
         is3D ? <Sierpinski3D level={level} /> : (
-          <svg viewBox="-20 -10 140 120" className="w-full h-full drop-shadow-md">
+          <svg viewBox="-20 -26.7 140 140" className="w-full h-full drop-shadow-md">
             <Sierpinski2D level={level} x={0} y={86.6} size={100} />
           </svg>
         )
@@ -129,9 +129,22 @@ function Sierpinski3D({ level }: { level: number }) {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
 
-    // 降低 FOV (從 75 降到 35) 以減少透視變形，並將攝影機往後拉
-    const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1000);
-    camera.position.set(0, 0.5, 4.2);
+    const aspect = width / height;
+    const camera = new THREE.PerspectiveCamera(35, aspect, 0.1, 1000);
+    camera.position.set(0, 0.1, 4.4);
+
+    const updateCameraFov = (currentAspect: number) => {
+      const baseFov = 35;
+      if (currentAspect < 1) {
+        const tanBaseVFov = Math.tan(THREE.MathUtils.degToRad(baseFov / 2));
+        const newVFovRad = 2 * Math.atan(tanBaseVFov / currentAspect);
+        camera.fov = THREE.MathUtils.radToDeg(newVFovRad);
+      } else {
+        camera.fov = baseFov;
+      }
+      camera.updateProjectionMatrix();
+    };
+    updateCameraFov(aspect);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
@@ -142,7 +155,7 @@ function Sierpinski3D({ level }: { level: number }) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     // 將視角目標對準原點偏上，讓三角形置中
-    controls.target.set(0, 0.2, 0);
+    controls.target.set(0, 0.1, 0);
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
     scene.add(ambientLight);
@@ -171,8 +184,9 @@ function Sierpinski3D({ level }: { level: number }) {
       if (!mountNode) return;
       const newWidth = mountNode.clientWidth;
       const newHeight = mountNode.clientHeight;
-      camera.aspect = newWidth / newHeight;
-      camera.updateProjectionMatrix();
+      const newAspect = newWidth / newHeight;
+      camera.aspect = newAspect;
+      updateCameraFov(newAspect);
       renderer.setSize(newWidth, newHeight);
     };
     window.addEventListener('resize', handleResize);

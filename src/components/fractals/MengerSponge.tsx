@@ -89,8 +89,22 @@ function MengerSponge3D({ level }: { level: number }) {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
 
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const aspect = width / height;
+    const camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
     camera.position.set(1.0, 1.0, 1.5);
+
+    const updateCameraFov = (currentAspect: number) => {
+      const baseFov = 75;
+      if (currentAspect < 1) {
+        const tanBaseVFov = Math.tan(THREE.MathUtils.degToRad(baseFov / 2));
+        const newVFovRad = 2 * Math.atan(tanBaseVFov / currentAspect);
+        camera.fov = THREE.MathUtils.radToDeg(newVFovRad);
+      } else {
+        camera.fov = baseFov;
+      }
+      camera.updateProjectionMatrix();
+    };
+    updateCameraFov(aspect);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
@@ -128,8 +142,9 @@ function MengerSponge3D({ level }: { level: number }) {
       if (!mountNode) return;
       const newWidth = mountNode.clientWidth;
       const newHeight = mountNode.clientHeight;
-      camera.aspect = newWidth / newHeight;
-      camera.updateProjectionMatrix();
+      const newAspect = newWidth / newHeight;
+      camera.aspect = newAspect;
+      updateCameraFov(newAspect);
       renderer.setSize(newWidth, newHeight);
     };
     window.addEventListener('resize', handleResize);
