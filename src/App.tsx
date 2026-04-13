@@ -9,7 +9,7 @@ import SierpinskiTriangle from './components/fractals/SierpinskiTriangle';
 import PythagorasTree from './components/fractals/PythagorasTree';
 import KochSnowflake from './components/fractals/KochSnowflake';
 import FractalTree from './components/fractals/FractalTree';
-import logoImg from './assets/logo.png';
+import logoImg from './assets/company-logo.png';
 
 const fractals = [
   { id: 'menger', name: '門格海綿 (Menger Sponge)', component: MengerSponge },
