@@ -42,7 +42,7 @@ export default function App() {
       {/* Header */}
       <header className="h-16 flex items-center px-5 bg-white border-b border-[#d8dcea] shrink-0 gap-4 z-20">
         <div className="h-10 shrink-0 relative flex items-center justify-center">
-          <img src={logoImg} alt="Company Logo" className="h-full object-contain" />
+          <img src={logoImg} alt="Company Logo" className="h-full object-contain" referrerPolicy="no-referrer" />
         </div>
         <div className="w-px h-8 bg-[#d8dcea]"></div>
         <div>
