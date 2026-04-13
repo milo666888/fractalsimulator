@@ -58,6 +58,12 @@ export default function FractalTree({ dropdownNode }: { dropdownNode: React.Reac
       controlsNode={controlsNode}
       mathNode={mathNode}
       canvasNode={<svg viewBox="0 0 500 500" className="w-full h-full drop-shadow-md">{elements}</svg>}
+      onReset={() => {
+        setLevel(7);
+        setAngle(25);
+        setSkewAngle(0);
+        setLengthScale(0.75);
+      }}
     />
   );
 }

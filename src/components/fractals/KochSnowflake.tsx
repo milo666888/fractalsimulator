@@ -64,6 +64,7 @@ export default function KochSnowflake({ dropdownNode }: { dropdownNode: React.Re
       controlsNode={controlsNode}
       mathNode={mathNode}
       canvasNode={<svg viewBox="0 0 300 300" className="w-full h-full max-w-2xl drop-shadow-md"><path d={pathData} fill="#bae6fd" stroke="#0284c7" strokeWidth="1" strokeLinejoin="round" /></svg>}
+      onReset={() => setLevel(0)}
     />
   );
 }

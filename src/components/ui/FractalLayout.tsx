@@ -33,9 +33,10 @@ interface FractalLayoutProps {
   canvasNode: React.ReactNode;
   title: string;
   description: React.ReactNode;
+  onReset?: () => void;
 }
 
-export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode, title, description }: FractalLayoutProps) {
+export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode, title, description, onReset }: FractalLayoutProps) {
   const [isDescOpen, setIsDescOpen] = useState(false);
 
   return (
@@ -64,9 +65,17 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
           </AnimatePresence>
         </div>
         <div className="p-4">
-          <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
-            參數設定
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280]">
+              <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
+              參數設定
+            </div>
+            {onReset && (
+              <button onClick={onReset} className="text-xs flex items-center gap-1 text-[#5a6280] hover:text-[#3060e0] transition-colors bg-white border border-[#d8dcea] px-2 py-1 rounded shadow-sm">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                重設
+              </button>
+            )}
           </div>
           <div className="flex flex-col gap-4">
             {controlsNode}
@@ -97,9 +106,17 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
           </AnimatePresence>
         </div>
         <div className="p-4 lg:p-5 flex-1">
-          <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
-            參數設定
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280]">
+              <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
+              參數設定
+            </div>
+            {onReset && (
+              <button onClick={onReset} className="text-xs flex items-center gap-1 text-[#5a6280] hover:text-[#3060e0] transition-colors bg-white border border-[#d8dcea] px-2 py-1 rounded shadow-sm">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                重設
+              </button>
+            )}
           </div>
           <div className="flex flex-col gap-4">
             {controlsNode}
@@ -185,20 +202,43 @@ export function DataRow({ title, value, formulaNode, colorClass = "text-[#3060e0
 }
 
 export function SliderControl({ label, value, min, max, step = 1, onChange, colorClass = "accent-[#3060e0]", isPlaying, onPlayToggle }: any) {
+  const [localValue, setLocalValue] = useState(value.toString());
+
+  useEffect(() => {
+    setLocalValue(value.toString());
+  }, [value]);
+
   const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = parseFloat(e.target.value);
-    // 防呆：如果輸入超過最大值，強制設為最大值，避免當機
-    if (val > max) {
-      e.target.value = max.toString();
+    const rawValue = e.target.value;
+    setLocalValue(rawValue);
+    
+    if (rawValue === '' || rawValue === '-') {
+      return; // 暫時不觸發 onChange，讓使用者可以清空輸入框或輸入負號
     }
-    onChange(e);
+    
+    let val = parseFloat(rawValue);
+    if (!isNaN(val)) {
+      // 防呆：如果輸入超過最大值，強制設為最大值
+      if (val > max) {
+        e.target.value = max.toString();
+        setLocalValue(max.toString());
+      }
+      onChange(e);
+    }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    let val = parseFloat(e.target.value);
-    // 防呆：如果清空或小於最小值，離開焦點時補回最小值
-    if (isNaN(val) || val < min) {
+    let val = parseFloat(localValue);
+    // 防呆：如果清空或無效數字，回歸上一個有效數值
+    if (isNaN(val)) {
+      e.target.value = value.toString();
+      setLocalValue(value.toString());
+    } else if (val < min) {
       e.target.value = min.toString();
+      setLocalValue(min.toString());
+      onChange(e);
+    } else {
+      e.target.value = val.toString();
       onChange(e);
     }
   };
@@ -222,7 +262,7 @@ export function SliderControl({ label, value, min, max, step = 1, onChange, colo
       <div className="w-16 shrink-0">
         <input 
           type="number" 
-          value={value} 
+          value={localValue} 
           min={min} 
           max={max} 
           step={step}

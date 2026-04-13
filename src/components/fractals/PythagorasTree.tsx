@@ -22,6 +22,9 @@ export default function PythagorasTree({ dropdownNode }: { dropdownNode: React.R
     </>
   );
 
+  // 動態計算 X 軸平移，讓傾斜的樹保持在畫面中央
+  const offsetX = (angleDeg - 45) * 2.5;
+
   return (
     <FractalLayout
       dropdownNode={dropdownNode}
@@ -29,7 +32,17 @@ export default function PythagorasTree({ dropdownNode }: { dropdownNode: React.R
       description={<p><strong>畢氏樹</strong>是由正方形組成的平面碎形。從一個大正方形開始，在其上方建立一個直角三角形，然後在三角形的另外兩個邊上建立兩個較小的正方形，不斷重複此過程。</p>}
       controlsNode={controlsNode}
       mathNode={mathNode}
-      canvasNode={<svg viewBox="-250 -400 500 450" className="w-full h-full drop-shadow-md"><Tree level={level} angle={angleDeg * (Math.PI / 180)} /></svg>}
+      canvasNode={
+        <svg viewBox="-150 -320 300 360" className="w-full h-full drop-shadow-md">
+          <g transform={`translate(${offsetX}, 0)`}>
+            <Tree level={level} angle={angleDeg * (Math.PI / 180)} />
+          </g>
+        </svg>
+      }
+      onReset={() => {
+        setLevel(5);
+        setAngleDeg(45);
+      }}
     />
   );
 }

@@ -70,6 +70,7 @@ export default function MengerSponge({ dropdownNode }: { dropdownNode: React.Rea
       controlsNode={controlsNode}
       mathNode={mathNode}
       canvasNode={<MengerSponge3D level={n} />}
+      onReset={() => setN(0)}
     />
   );
 }

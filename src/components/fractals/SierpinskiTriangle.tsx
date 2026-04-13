@@ -79,11 +79,15 @@ export default function SierpinskiTriangle({ dropdownNode }: { dropdownNode: Rea
       mathNode={mathNode}
       canvasNode={
         is3D ? <Sierpinski3D level={level} /> : (
-          <svg viewBox="-30 -20 160 126.6" className="w-full h-full max-w-2xl drop-shadow-md">
+          <svg viewBox="-20 -10 140 120" className="w-full h-full drop-shadow-md">
             <Sierpinski2D level={level} x={0} y={86.6} size={100} />
           </svg>
         )
       }
+      onReset={() => {
+        setLevel(0);
+        setIs3D(false);
+      }}
     />
   );
 }
@@ -127,7 +131,7 @@ function Sierpinski3D({ level }: { level: number }) {
 
     // 降低 FOV (從 75 降到 35) 以減少透視變形，並將攝影機往後拉
     const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1000);
-    camera.position.set(0, 1.5, 6.5);
+    camera.position.set(0, 0.5, 4.2);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
@@ -137,8 +141,8 @@ function Sierpinski3D({ level }: { level: number }) {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    // 將視角目標對準原點
-    controls.target.set(0, 0, 0);
+    // 將視角目標對準原點偏上，讓三角形置中
+    controls.target.set(0, 0.2, 0);
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
     scene.add(ambientLight);

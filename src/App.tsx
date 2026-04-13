@@ -20,7 +20,6 @@ const fractals = [
 
 export default function App() {
   const [selectedFractal, setSelectedFractal] = useState(fractals[0].id);
-  const [logoError, setLogoError] = useState(false);
 
   const CurrentFractalComponent = fractals.find(f => f.id === selectedFractal)?.component || MengerSponge;
 
@@ -41,26 +40,16 @@ export default function App() {
     <div className="min-h-[100dvh] lg:h-[100dvh] w-screen flex flex-col bg-[#f4f5fa] lg:overflow-hidden overflow-y-auto" style={{ fontFamily: '"Times New Roman", "Noto Sans TC", "Microsoft JhengHei", sans-serif' }}>
       {/* Header */}
       <header className="h-16 flex items-center px-5 bg-white border-b border-[#d8dcea] shrink-0 gap-4 z-20">
-        <div className="h-10 w-10 shrink-0 relative flex items-center justify-center">
-          {/* 支援使用者自行上傳的 logo.png */}
-          {!logoError && (
-            <img 
-              src={`${import.meta.env.BASE_URL}logo.png?v=1.3`}
-              alt="Logo" 
-              className="max-h-full max-w-full object-contain z-10" 
-              onError={() => setLogoError(true)}
-            />
-          )}
-          {logoError && (
-            <div className="absolute inset-0 bg-[#eef0f8] border-2 border-dashed border-[#c0c8e0] rounded-lg flex items-center justify-center text-[10px] text-[#9098b8] font-bold text-center leading-tight z-0">
-              公司<br/>LOGO
-            </div>
-          )}
+        <div className="h-10 w-10 shrink-0 relative flex items-center justify-center bg-gradient-to-br from-[#3060e0] to-[#7c3aed] rounded-lg shadow-sm">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white">
+            <path d="M12 2L2 20H22L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+            <path d="M12 10L7 19H17L12 10Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+          </svg>
         </div>
         <div className="w-px h-8 bg-[#d8dcea]"></div>
         <div>
           <h1 className="text-xl font-bold text-[#1a1f36] leading-tight">
-            碎形模擬器 <span className="text-[10px] text-gray-400 font-normal ml-2">v1.3</span>
+            碎形模擬器
           </h1>
           <p className="text-[13px] text-[#5a6280] mt-0.5 hidden sm:block">觀察數學圖形：遞迴、維度與極限</p>
         </div>
