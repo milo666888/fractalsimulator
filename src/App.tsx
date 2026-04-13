@@ -49,7 +49,7 @@ export default function App() {
           <h1 className="text-xl font-bold text-[#1a1f36] leading-tight">
             碎形模擬器
           </h1>
-          <p className="text-[13px] text-[#5a6280] mt-0.5 hidden sm:block">觀察數學圖形：遞迴、維度與極限</p>
+          <p className="text-[13px] text-[#5a6280] mt-0.5 hidden sm:block">觀察數學之美</p>
         </div>
       </header>
 
