@@ -218,25 +218,20 @@ export function SliderControl({ label, value, min, max, step = 1, onChange, colo
     
     let val = parseFloat(rawValue);
     if (!isNaN(val)) {
-      // 防呆：如果輸入超過最大值，強制設為最大值
-      if (val > max) {
-        e.target.value = max.toString();
-        setLocalValue(max.toString());
+      // 只有在合法範圍內才即時更新圖形，超出範圍則等待 onBlur 時回歸
+      if (val >= min && val <= max) {
+        onChange(e);
       }
-      onChange(e);
     }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     let val = parseFloat(localValue);
-    // 防呆：如果清空或無效數字，回歸上一個有效數值
-    if (isNaN(val)) {
+    // 防呆：如果清空、無效數字、或超出範圍，回歸上一個有效數值 (value)
+    if (isNaN(val) || val < min || val > max) {
       e.target.value = value.toString();
       setLocalValue(value.toString());
-    } else if (val < min) {
-      e.target.value = min.toString();
-      setLocalValue(min.toString());
-      onChange(e);
+      // 因為數值回歸到原本的 value，不需要觸發 onChange
     } else {
       e.target.value = val.toString();
       onChange(e);

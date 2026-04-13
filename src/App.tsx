@@ -9,6 +9,7 @@ import SierpinskiTriangle from './components/fractals/SierpinskiTriangle';
 import PythagorasTree from './components/fractals/PythagorasTree';
 import KochSnowflake from './components/fractals/KochSnowflake';
 import FractalTree from './components/fractals/FractalTree';
+import logoImg from './assets/logo.png';
 
 const fractals = [
   { id: 'menger', name: '門格海綿 (Menger Sponge)', component: MengerSponge },
@@ -40,11 +41,8 @@ export default function App() {
     <div className="min-h-[100dvh] lg:h-[100dvh] w-screen flex flex-col bg-[#f4f5fa] lg:overflow-hidden overflow-y-auto" style={{ fontFamily: '"Times New Roman", "Noto Sans TC", "Microsoft JhengHei", sans-serif' }}>
       {/* Header */}
       <header className="h-16 flex items-center px-5 bg-white border-b border-[#d8dcea] shrink-0 gap-4 z-20">
-        <div className="h-10 w-10 shrink-0 relative flex items-center justify-center bg-gradient-to-br from-[#3060e0] to-[#7c3aed] rounded-lg shadow-sm">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white">
-            <path d="M12 2L2 20H22L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-            <path d="M12 10L7 19H17L12 10Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-          </svg>
+        <div className="h-10 shrink-0 relative flex items-center justify-center">
+          <img src={logoImg} alt="Company Logo" className="h-full object-contain" />
         </div>
         <div className="w-px h-8 bg-[#d8dcea]"></div>
         <div>
