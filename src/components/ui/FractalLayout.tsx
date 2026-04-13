@@ -40,7 +40,7 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
   const [isDescOpen, setIsDescOpen] = useState(false);
 
   return (
-    <div className="flex flex-col lg:flex-row flex-1 lg:overflow-hidden w-full h-full bg-[#f4f5fa] text-[#1a1f36]">
+    <div className="flex flex-col lg:flex-row flex-1 overflow-y-auto lg:overflow-hidden w-full h-full bg-[#f4f5fa] text-[#1a1f36]">
       
       {/* 手機/平板版上方列 */}
       <div className="lg:hidden flex flex-col bg-white border-b border-[#d8dcea] shrink-0 z-10">
@@ -63,23 +63,6 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-        <div className="p-4">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280]">
-              <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
-              參數設定
-            </div>
-            {onReset && (
-              <button onClick={onReset} className="text-xs flex items-center gap-1 text-[#5a6280] hover:text-[#3060e0] transition-colors bg-white border border-[#d8dcea] px-2 py-1 rounded shadow-sm">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                重設
-              </button>
-            )}
-          </div>
-          <div className="flex flex-col gap-4">
-            {controlsNode}
-          </div>
         </div>
       </div>
 
@@ -125,8 +108,8 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
       </aside>
 
       {/* 中間畫布區域 */}
-      <main className="flex-1 relative flex items-center justify-center lg:overflow-hidden p-2 lg:p-4 min-h-[50vh] lg:min-h-0 shrink-0">
-        <div className="w-full h-full bg-white rounded-xl shadow-sm border border-[#d8dcea] relative overflow-hidden flex items-center justify-center">
+      <main className="w-full lg:flex-1 relative flex items-center justify-center lg:overflow-hidden p-3 lg:p-4 shrink-0">
+        <div className="w-full aspect-square max-h-[400px] lg:aspect-auto lg:h-full lg:max-h-none bg-white rounded-xl shadow-sm border border-[#d8dcea] relative overflow-hidden flex items-center justify-center">
           {canvasNode}
         </div>
       </main>
@@ -144,8 +127,25 @@ export function FractalLayout({ dropdownNode, controlsNode, mathNode, canvasNode
         </div>
       </aside>
 
-      {/* 手機/平板版下方區域 (算術與數據) */}
+      {/* 手機/平板版下方區域 (參數與數據) */}
       <div className="lg:hidden flex flex-col shrink-0 z-10 bg-white border-t border-[#d8dcea]">
+        <div className="p-4 border-b border-[#d8dcea]">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280]">
+              <span className="w-2 h-2 rounded-full bg-[#3060e0]"></span>
+              參數設定
+            </div>
+            {onReset && (
+              <button onClick={onReset} className="text-xs flex items-center gap-1 text-[#5a6280] hover:text-[#3060e0] transition-colors bg-white border border-[#d8dcea] px-2 py-1 rounded shadow-sm">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                重設
+              </button>
+            )}
+          </div>
+          <div className="flex flex-col gap-4">
+            {controlsNode}
+          </div>
+        </div>
         <div className="p-4 bg-[#f4f5fa]">
           <div className="flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase text-[#5a6280] mb-4">
             <span className="w-2 h-2 rounded-full bg-[#7c3aed]"></span>
